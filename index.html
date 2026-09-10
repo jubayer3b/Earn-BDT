@@ -1,0 +1,1597 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="monetag" content="d88637dc99f7634d264508ea164c186f">
+
+    <title>BD Earning Zone</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f1f5f9;
+            color: #1e293b;
+            min-height: 100vh;
+        }
+
+        button,
+        input,
+        select {
+            font: inherit;
+        }
+
+        button {
+            cursor: pointer;
+        }
+
+        /* =========================
+           AUTH
+        ========================= */
+
+        .auth-wrapper {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            background: linear-gradient(135deg, #0f766e, #2563eb);
+        }
+
+        .auth-card {
+            width: 100%;
+            max-width: 430px;
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 20px 60px rgba(0,0,0,.2);
+        }
+
+        .logo {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .logo-icon {
+            width: 65px;
+            height: 65px;
+            border-radius: 18px;
+            background: linear-gradient(135deg, #10b981, #2563eb);
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: auto;
+            font-size: 30px;
+            font-weight: bold;
+        }
+
+        .logo h1 {
+            margin-top: 12px;
+            font-size: 25px;
+        }
+
+        .logo p {
+            color: #64748b;
+            margin-top: 5px;
+        }
+
+        .auth-form h2 {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 7px;
+            font-size: 14px;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 13px;
+            border: 1px solid #cbd5e1;
+            border-radius: 10px;
+            outline: none;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            border-color: #2563eb;
+        }
+
+        .primary-btn {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 10px;
+            color: white;
+            background: linear-gradient(135deg, #2563eb, #0f766e);
+            font-weight: bold;
+            transition: .2s;
+        }
+
+        .primary-btn:hover {
+            transform: translateY(-1px);
+        }
+
+        .switch-auth {
+            text-align: center;
+            margin-top: 18px;
+            color: #64748b;
+        }
+
+        .switch-auth button {
+            border: none;
+            background: none;
+            color: #2563eb;
+            font-weight: bold;
+        }
+
+        /* =========================
+           DASHBOARD
+        ========================= */
+
+        .dashboard {
+            display: none;
+            min-height: 100vh;
+        }
+
+        .navbar {
+            height: 65px;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 25px;
+            box-shadow: 0 2px 12px rgba(0,0,0,.06);
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .nav-brand {
+            font-size: 21px;
+            font-weight: bold;
+            color: #0f766e;
+        }
+
+        .logout-btn {
+            border: none;
+            background: #fee2e2;
+            color: #dc2626;
+            padding: 9px 15px;
+            border-radius: 8px;
+            font-weight: bold;
+        }
+
+        .main {
+            max-width: 1100px;
+            margin: auto;
+            padding: 25px;
+        }
+
+        .welcome {
+            margin-bottom: 22px;
+        }
+
+        .welcome h2 {
+            margin-bottom: 5px;
+        }
+
+        .welcome p {
+            color: #64748b;
+        }
+
+        /* Balance */
+
+        .balance-card {
+            background: linear-gradient(135deg, #0f766e, #2563eb);
+            color: white;
+            border-radius: 20px;
+            padding: 28px;
+            margin-bottom: 22px;
+            box-shadow: 0 15px 35px rgba(37,99,235,.2);
+        }
+
+        .balance-card small {
+            opacity: .8;
+        }
+
+        .balance {
+            font-size: 38px;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+
+        /* Grid */
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 17px;
+            padding: 23px;
+            box-shadow: 0 5px 20px rgba(0,0,0,.05);
+        }
+
+        .card h3 {
+            margin-bottom: 15px;
+        }
+
+        /* Ad */
+
+        .ad-box {
+            text-align: center;
+            border: 2px dashed #cbd5e1;
+            padding: 25px 15px;
+            border-radius: 14px;
+            background: #f8fafc;
+        }
+
+        .ad-icon {
+            font-size: 50px;
+            margin-bottom: 10px;
+        }
+
+        .timer {
+            font-size: 35px;
+            font-weight: bold;
+            color: #2563eb;
+            margin: 15px 0;
+        }
+
+        .ad-btn {
+            width: 100%;
+            padding: 13px;
+            border: none;
+            border-radius: 10px;
+            background: #10b981;
+            color: white;
+            font-weight: bold;
+        }
+
+        .ad-btn:disabled {
+            background: #94a3b8;
+            cursor: not-allowed;
+        }
+
+        .earning-info {
+            margin-top: 12px;
+            font-size: 13px;
+            color: #64748b;
+        }
+
+        /* Withdrawal */
+
+        .withdraw-btn {
+            width: 100%;
+            padding: 13px;
+            background: #2563eb;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-weight: bold;
+        }
+
+        .withdraw-note {
+            margin-top: 12px;
+            padding: 12px;
+            border-radius: 10px;
+            background: #eff6ff;
+            color: #1d4ed8;
+            font-size: 13px;
+        }
+
+        /* History */
+
+        .history {
+            margin-top: 20px;
+        }
+
+        .history-item {
+            display: flex;
+            justify-content: space-between;
+            gap: 15px;
+            padding: 14px 0;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .history-item:last-child {
+            border-bottom: none;
+        }
+
+        .history-title {
+            font-weight: bold;
+        }
+
+        .history-date {
+            font-size: 12px;
+            color: #64748b;
+            margin-top: 4px;
+        }
+
+        .amount-positive {
+            color: #059669;
+            font-weight: bold;
+        }
+
+        .amount-negative {
+            color: #dc2626;
+            font-weight: bold;
+        }
+
+        .empty-history {
+            text-align: center;
+            color: #94a3b8;
+            padding: 20px;
+        }
+
+        /* Toast */
+
+        .toast {
+            position: fixed;
+            right: 20px;
+            bottom: 20px;
+            background: #0f172a;
+            color: white;
+            padding: 14px 18px;
+            border-radius: 10px;
+            display: none;
+            z-index: 100;
+            max-width: 320px;
+        }
+
+        /* Responsive */
+
+        @media(max-width: 750px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+
+            .navbar {
+                padding: 0 15px;
+            }
+
+            .main {
+                padding: 18px 13px;
+            }
+
+            .balance {
+                font-size: 32px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- =====================================================
+     AUTH SECTION
+===================================================== -->
+
+<div class="auth-wrapper" id="authWrapper">
+
+    <div class="auth-card">
+
+        <div class="logo">
+            <div class="logo-icon">৳</div>
+            <h1>BD Earning Zone</h1>
+            <p>Watch Ads • Earn Money</p>
+        </div>
+
+        <!-- LOGIN -->
+
+        <form id="loginForm" class="auth-form">
+
+            <h2>Login</h2>
+
+            <div class="form-group">
+                <label>Email / Username</label>
+                <input
+                    type="text"
+                    id="loginUsername"
+                    placeholder="Enter username"
+                    required
+                >
+            </div>
+
+            <div class="form-group">
+                <label>Password</label>
+                <input
+                    type="password"
+                    id="loginPassword"
+                    placeholder="Enter password"
+                    required
+                >
+            </div>
+
+            <button class="primary-btn" type="submit">
+                Login
+            </button>
+
+            <div class="switch-auth">
+                Don't have an account?
+                <button type="button" id="showRegister">
+                    Register
+                </button>
+            </div>
+
+        </form>
+
+
+        <!-- REGISTER -->
+
+        <form id="registerForm" class="auth-form" style="display:none;">
+
+            <h2>Create Account</h2>
+
+            <div class="form-group">
+                <label>Full Name</label>
+                <input
+                    type="text"
+                    id="registerName"
+                    placeholder="Your full name"
+                    required
+                >
+            </div>
+
+            <div class="form-group">
+                <label>Username</label>
+                <input
+                    type="text"
+                    id="registerUsername"
+                    placeholder="Choose username"
+                    required
+                >
+            </div>
+
+            <div class="form-group">
+                <label>Password</label>
+                <input
+                    type="password"
+                    id="registerPassword"
+                    placeholder="Create password"
+                    required
+                >
+            </div>
+
+            <button class="primary-btn" type="submit">
+                Create Account
+            </button>
+
+            <div class="switch-auth">
+                Already have an account?
+                <button type="button" id="showLogin">
+                    Login
+                </button>
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     DASHBOARD
+===================================================== -->
+
+<div class="dashboard" id="dashboard">
+
+    <nav class="navbar">
+
+        <div class="nav-brand">
+            Earn Money 💰
+        </div>
+
+        <button class="logout-btn" id="logoutBtn">
+            Logout
+        </button>
+
+    </nav>
+
+
+    <main class="main">
+
+        <div class="welcome">
+            <h2>Welcome, <span id="userName"></span> 👋</h2>
+            <p>Complete tasks and earn BDT.</p>
+        </div>
+
+
+        <!-- BALANCE -->
+
+        <div class="balance-card">
+
+            <small>Current Balance</small>
+
+            <div class="balance">
+                ৳ <span id="balance">10.00</span>
+            </div>
+
+            <small>
+                Available earning balance
+            </small>
+
+        </div>
+
+
+        <div class="grid">
+
+            <!-- =========================
+                 WATCH ADS
+            ========================== -->
+
+            <div class="card">
+
+                <h3>📺 Watch Advertisement</h3>
+
+                <div class="ad-box">
+
+                    <div class="ad-icon">
+                        📺
+                    </div>
+
+                    <p>
+                        Watch the advertisement for
+                        <strong>1 Minute</strong>.
+                    </p>
+
+                    <div class="timer" id="timer">
+                        1
+                    </div>
+
+                    <button
+                        class="ad-btn"
+                        id="watchAdBtn"
+                    >
+                        ▶ Start Watching
+                    </button>
+
+                    <div class="earning-info">
+                        Reward per completed ad:
+                        <strong>৳2.50</strong>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- =========================
+                 WITHDRAW
+            ========================== -->
+
+            <div class="card">
+
+                <h3>💸 Withdraw Money</h3>
+
+                <form id="withdrawForm">
+
+                    <div class="form-group">
+
+                        <label>
+                            Payment Method
+                        </label>
+
+                        <select id="paymentMethod" required>
+
+                            <option value="">
+                                Select Method
+                            </option>
+
+                            <option value="bKash">
+                                bKash
+                            </option>
+
+                            <option value="Nagad">
+                                Nagad
+                            </option>
+
+                            <option value="Rocket">
+                                Rocket
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Account Number
+                        </label>
+
+                        <input
+                            type="tel"
+                            id="paymentNumber"
+                            placeholder="01XXXXXXXXX"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Amount (BDT)
+                        </label>
+
+                        <input
+                            type="number"
+                            id="withdrawAmount"
+                            min="110"
+                            step="1"
+                            placeholder="Minimum ৳110"
+                            required
+                        >
+
+                    </div>
+
+
+                    <button
+                        class="withdraw-btn"
+                        type="submit"
+                    >
+                        Send Withdrawal Request
+                    </button>
+
+                </form>
+
+
+                <div class="withdraw-note">
+                    Minimum withdrawal: ৳110
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- =========================
+             TRANSACTION HISTORY
+        ========================== -->
+
+        <div class="card history">
+
+            <h3>📋 Transaction History</h3>
+
+            <div id="historyList"></div>
+
+        </div>
+
+    </main>
+
+</div>
+
+
+<!-- TOAST -->
+
+<div class="toast" id="toast"></div>
+
+
+<script>
+/* =====================================================
+   CONFIGURATION
+===================================================== */
+
+/*
+    ⚠️ DEMO ONLY
+
+    Never expose a real Telegram Bot Token in frontend
+    JavaScript in a production application.
+
+    Replace these placeholders ONLY for local testing.
+
+    Production:
+    Browser → Your Backend → Telegram API
+*/
+
+const TELEGRAM_BOT_TOKEN = "8800387962:AAEOvTgPkiCbui1PK9PwLIZ-y95asovRD-I";
+const TELEGRAM_CHAT_ID = "6103871222";
+
+
+/* Earning configuration */
+
+const AD_DURATION = 60;       // seconds
+const AD_REWARD = 2.50;       // BDT
+const MIN_WITHDRAW = 110;
+
+
+/* =====================================================
+   DATABASE - DEMO LOCAL STORAGE
+===================================================== */
+
+function getUsers() {
+
+    return JSON.parse(
+        localStorage.getItem("bd_users") || "[]"
+    );
+
+}
+
+
+function saveUsers(users) {
+
+    localStorage.setItem(
+        "bd_users",
+        JSON.stringify(users)
+    );
+
+}
+
+
+function getCurrentUser() {
+
+    const username =
+        localStorage.getItem("bd_current_user");
+
+    if (!username) return null;
+
+    const users = getUsers();
+
+    return users.find(
+        user => user.username === username
+    ) || null;
+
+}
+
+
+function updateCurrentUser(updatedUser) {
+
+    const users = getUsers();
+
+    const index = users.findIndex(
+        user => user.username === updatedUser.username
+    );
+
+    if (index !== -1) {
+
+        users[index] = updatedUser;
+
+        saveUsers(users);
+
+    }
+
+}
+
+
+/* =====================================================
+   DOM ELEMENTS
+===================================================== */
+
+const authWrapper =
+    document.getElementById("authWrapper");
+
+const dashboard =
+    document.getElementById("dashboard");
+
+const loginForm =
+    document.getElementById("loginForm");
+
+const registerForm =
+    document.getElementById("registerForm");
+
+const showRegister =
+    document.getElementById("showRegister");
+
+const showLogin =
+    document.getElementById("showLogin");
+
+const logoutBtn =
+    document.getElementById("logoutBtn");
+
+const userName =
+    document.getElementById("userName");
+
+const balanceElement =
+    document.getElementById("balance");
+
+const watchAdBtn =
+    document.getElementById("watchAdBtn");
+
+const timerElement =
+    document.getElementById("timer");
+
+const withdrawForm =
+    document.getElementById("withdrawForm");
+
+const historyList =
+    document.getElementById("historyList");
+
+const toast =
+    document.getElementById("toast");
+
+
+/* =====================================================
+   TOAST
+===================================================== */
+
+function showToast(message) {
+
+    toast.textContent = message;
+
+    toast.style.display = "block";
+
+    setTimeout(() => {
+
+        toast.style.display = "none";
+
+    }, 3000);
+
+}
+
+
+/* =====================================================
+   TELEGRAM NOTIFICATION
+===================================================== */
+
+async function sendTelegramMessage(message) {
+
+    /*
+        If credentials are not configured,
+        simply skip the request.
+    */
+
+    if (
+        !TELEGRAM_BOT_TOKEN ||
+        TELEGRAM_BOT_TOKEN === "telegram_bot_token" ||
+        !TELEGRAM_CHAT_ID ||
+        TELEGRAM_CHAT_ID === "telegram_chat_id"
+    ) {
+
+        console.log(
+            "Telegram configuration not set:",
+            message
+        );
+
+        return;
+
+    }
+
+
+    const url =
+        `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`;
+
+
+    try {
+
+        await fetch(url, {
+
+            method: "POST",
+
+            headers: {
+                "Content-Type": "application/json"
+            },
+
+            body: JSON.stringify({
+
+                chat_id: TELEGRAM_CHAT_ID,
+
+                text: message
+
+            })
+
+        });
+
+    } catch (error) {
+
+        console.error(
+            "Telegram notification failed:",
+            error
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   REGISTER
+===================================================== */
+
+registerForm.addEventListener(
+    "submit",
+    async function(event) {
+
+        event.preventDefault();
+
+
+        const name =
+            document.getElementById(
+                "registerName"
+            ).value.trim();
+
+
+        const username =
+            document.getElementById(
+                "registerUsername"
+            ).value.trim();
+
+
+        const password =
+            document.getElementById(
+                "registerPassword"
+            ).value;
+
+
+        if (
+            !name ||
+            !username ||
+            !password
+        ) {
+
+            showToast(
+                "Please complete all fields."
+            );
+
+            return;
+
+        }
+
+
+        const users = getUsers();
+
+
+        const exists = users.some(
+            user =>
+                user.username.toLowerCase() ===
+                username.toLowerCase()
+        );
+
+
+        if (exists) {
+
+            showToast(
+                "Username already exists."
+            );
+
+            return;
+
+        }
+
+
+        const newUser = {
+
+            name: name,
+
+            username: username,
+
+            password: password,
+
+            balance: 0,
+
+            history: [],
+
+            createdAt:
+                new Date().toISOString()
+
+        };
+
+
+        users.push(newUser);
+
+        saveUsers(users);
+
+
+        /*
+            Telegram registration notification
+        */
+
+        await sendTelegramMessage(
+
+            `🆕 NEW REGISTRATION
+
+Name: ${name}
+Username: ${username}
+Time: ${new Date().toLocaleString()}`
+
+        );
+
+
+        showToast(
+            "Registration successful. Please login."
+        );
+
+
+        registerForm.reset();
+
+
+        registerForm.style.display = "none";
+        loginForm.style.display = "block";
+
+    }
+);
+
+
+/* =====================================================
+   LOGIN
+===================================================== */
+
+loginForm.addEventListener(
+    "submit",
+    async function(event) {
+
+        event.preventDefault();
+
+
+        const username =
+            document.getElementById(
+                "loginUsername"
+            ).value.trim();
+
+
+        const password =
+            document.getElementById(
+                "loginPassword"
+            ).value;
+
+
+        const users = getUsers();
+
+
+        const user = users.find(
+
+            u =>
+                u.username === username &&
+                u.password === password
+
+        );
+
+
+        if (!user) {
+
+            showToast(
+                "Invalid username or password."
+            );
+
+            return;
+
+        }
+
+
+        localStorage.setItem(
+            "bd_current_user",
+            user.username
+        );
+
+
+        /*
+            Telegram login notification
+        */
+
+        await sendTelegramMessage(
+
+            `🔐 USER LOGIN
+
+Username: ${user.username}
+Time: ${new Date().toLocaleString()}`
+
+        );
+
+
+        loginForm.reset();
+
+        loadDashboard();
+
+    }
+);
+
+
+/* =====================================================
+   SHOW REGISTER
+===================================================== */
+
+showRegister.addEventListener(
+    "click",
+    function() {
+
+        loginForm.style.display = "none";
+
+        registerForm.style.display = "block";
+
+    }
+);
+
+
+/* =====================================================
+   SHOW LOGIN
+===================================================== */
+
+showLogin.addEventListener(
+    "click",
+    function() {
+
+        registerForm.style.display = "none";
+
+        loginForm.style.display = "block";
+
+    }
+);
+
+
+/* =====================================================
+   LOAD DASHBOARD
+===================================================== */
+
+function loadDashboard() {
+
+    const user = getCurrentUser();
+
+
+    if (!user) {
+
+        authWrapper.style.display = "flex";
+
+        dashboard.style.display = "none";
+
+        return;
+
+    }
+
+
+    authWrapper.style.display = "none";
+
+    dashboard.style.display = "block";
+
+
+    userName.textContent =
+        user.name;
+
+
+    updateBalance();
+
+    renderHistory();
+
+}
+
+
+/* =====================================================
+   UPDATE BALANCE
+===================================================== */
+
+function updateBalance() {
+
+    const user = getCurrentUser();
+
+    if (!user) return;
+
+
+    balanceElement.textContent =
+        Number(user.balance).toFixed(2);
+
+}
+
+
+/* =====================================================
+   WATCH AD
+===================================================== */
+
+let adRunning = false;
+
+
+watchAdBtn.addEventListener(
+    "click",
+    function() {
+
+        if (adRunning) return;
+
+
+        const user = getCurrentUser();
+
+        if (!user) return;
+
+
+        adRunning = true;
+
+        watchAdBtn.disabled = true;
+
+        watchAdBtn.textContent =
+            "Watching...";
+
+
+        let remaining =
+            AD_DURATION;
+
+
+        timerElement.textContent =
+            remaining;
+
+
+        const timer =
+            setInterval(function() {
+
+                remaining--;
+
+                timerElement.textContent =
+                    remaining;
+
+
+                if (remaining <= 0) {
+
+                    clearInterval(timer);
+
+
+                    /*
+                        Reward user
+                    */
+
+                    const currentUser =
+                        getCurrentUser();
+
+
+                    currentUser.balance =
+                        Number(
+                            currentUser.balance
+                        ) + AD_REWARD;
+
+
+                    currentUser.history.unshift({
+
+                        type: "earning",
+
+                        title:
+                            "Advertisement Watched",
+
+                        amount:
+                            AD_REWARD,
+
+                        status:
+                            "Completed",
+
+                        date:
+                            new Date().toISOString()
+
+                    });
+
+
+                    updateCurrentUser(
+                        currentUser
+                    );
+
+
+                    updateBalance();
+
+                    renderHistory();
+
+
+                    showToast(
+                        `Congratulations! ৳${AD_REWARD.toFixed(2)} added.`
+                    );
+
+
+                    watchAdBtn.disabled =
+                        false;
+
+                    watchAdBtn.textContent =
+                        "▶ Start Watching";
+
+
+                    timerElement.textContent =
+                        AD_DURATION;
+
+
+                    adRunning = false;
+
+                }
+
+            }, 1000);
+
+    }
+);
+
+
+/* =====================================================
+   WITHDRAW
+===================================================== */
+
+withdrawForm.addEventListener(
+    "submit",
+    async function(event) {
+
+        event.preventDefault();
+
+
+        const user = getCurrentUser();
+
+
+        if (!user) {
+
+            showToast(
+                "Please login first."
+            );
+
+            return;
+
+        }
+
+
+        const method =
+            document.getElementById(
+                "paymentMethod"
+            ).value;
+
+
+        const number =
+            document.getElementById(
+                "paymentNumber"
+            ).value.trim();
+
+
+        const amount =
+            Number(
+                document.getElementById(
+                    "withdrawAmount"
+                ).value
+            );
+
+
+        if (!method || !number || !amount) {
+
+            showToast(
+                "Please complete all fields."
+            );
+
+            return;
+
+        }
+
+
+        if (amount < MIN_WITHDRAW) {
+
+            showToast(
+                `Minimum withdrawal is ৳${MIN_WITHDRAW}.`
+            );
+
+            return;
+
+        }
+
+
+        if (amount > Number(user.balance)) {
+
+            showToast(
+                "Insufficient balance."
+            );
+
+            return;
+
+        }
+
+
+        /*
+            Deduct balance
+        */
+
+        user.balance =
+            Number(user.balance) - amount;
+
+
+        /*
+            Add withdrawal history
+        */
+
+        user.history.unshift({
+
+            type: "withdraw",
+
+            title:
+                `Withdrawal - ${method}`,
+
+            amount:
+                amount,
+
+            status:
+                "Pending",
+
+            number:
+                number,
+
+            date:
+                new Date().toISOString()
+
+        });
+
+
+        updateCurrentUser(user);
+
+
+        updateBalance();
+
+        renderHistory();
+
+
+        /*
+            Telegram withdrawal notification
+        */
+
+        await sendTelegramMessage(
+
+            `💸 NEW WITHDRAWAL REQUEST
+
+Username: ${user.username}
+Name: ${user.name}
+
+Method: ${method}
+Account: ${number}
+Amount: ৳${amount.toFixed(2)}
+
+Status: Pending
+
+Time:
+${new Date().toLocaleString()}`
+
+        );
+
+
+        withdrawForm.reset();
+
+
+        showToast(
+            "Withdrawal request submitted."
+        );
+
+    }
+);
+
+
+/* =====================================================
+   RENDER TRANSACTION HISTORY
+===================================================== */
+
+function renderHistory() {
+
+    const user = getCurrentUser();
+
+
+    if (!user) return;
+
+
+    historyList.innerHTML = "";
+
+
+    if (
+        !user.history ||
+        user.history.length === 0
+    ) {
+
+        historyList.innerHTML = `
+            <div class="empty-history">
+                No transactions yet.
+            </div>
+        `;
+
+        return;
+
+    }
+
+
+    user.history.forEach(
+        transaction => {
+
+            const item =
+                document.createElement("div");
+
+
+            item.className =
+                "history-item";
+
+
+            const date =
+                new Date(
+                    transaction.date
+                ).toLocaleString();
+
+
+            const isEarning =
+                transaction.type ===
+                "earning";
+
+
+            item.innerHTML = `
+
+                <div>
+
+                    <div class="history-title">
+                        ${transaction.title}
+                    </div>
+
+                    <div class="history-date">
+                        ${date}
+                        ${
+                            transaction.status
+                            ? " • " +
+                              transaction.status
+                            : ""
+                        }
+                    </div>
+
+                </div>
+
+                <div class="${
+                    isEarning
+                    ? "amount-positive"
+                    : "amount-negative"
+                }">
+
+                    ${
+                        isEarning
+                        ? "+"
+                        : "-"
+                    }
+                    ৳${Number(
+                        transaction.amount
+                    ).toFixed(2)}
+
+                </div>
+
+            `;
+
+
+            historyList.appendChild(item);
+
+        }
+    );
+
+}
+
+
+/* =====================================================
+   LOGOUT
+===================================================== */
+
+logoutBtn.addEventListener(
+    "click",
+    function() {
+
+        localStorage.removeItem(
+            "bd_current_user"
+        );
+
+
+        dashboard.style.display =
+            "none";
+
+
+        authWrapper.style.display =
+            "flex";
+
+
+        showToast(
+            "Logged out successfully."
+        );
+
+    }
+);
+
+
+/* =====================================================
+   INITIALIZE
+===================================================== */
+
+loadDashboard();
+
+</script>
+
+</body>
+</html>
