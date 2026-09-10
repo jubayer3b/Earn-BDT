@@ -1190,7 +1190,7 @@ function updateBalance() {
    WATCH AD
 ===================================================== */
 
-let adRunning = true;
+let adRunning = false;
 
 
 watchAdBtn.addEventListener(
@@ -1210,7 +1210,7 @@ watchAdBtn.addEventListener(
         watchAdBtn.disabled = true;
 
         watchAdBtn.textContent =
-            "Watching...";
+            "পরবর্তী বিজ্ঞাপনের জন্য অপেক্ষা করুন...";
 
 
         let remaining =
